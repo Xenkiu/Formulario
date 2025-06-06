@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="form-container">
-    <h1>Registro de Pacientes</h1>
+    <h1>Registro</h1>
     <form id="paciente-form" name="paciente-form">
       <label>Nombre completo<input type="text" name="nombre" required /></label>
       <label>Teléfono<input type="tel" name="telefono" required /></label>
@@ -23,6 +23,13 @@
         </select>
       </label>
       <label>Monto abonado<input type="number" name="monto" required /></label>
+      <label>¿Pedido de lentes?
+        <select name="pedido_lentes" required>
+          <option value="">Selecciona</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+      </label>
       <button type="submit">Enviar</button>
       <p id="estado" class="estado"></p>
     </form>
