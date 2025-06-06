@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulario de Pacientes</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Registro de Pacientes</h1>
+    <form id="paciente-form" name="paciente-form">
+      <label>Nombre completo<input type="text" name="nombre" required /></label>
+      <label>Teléfono<input type="tel" name="telefono" required /></label>
+      <label>Dirección<input type="text" name="direccion" required /></label>
+      <label>Método de pago
+        <select name="metodo_pago" required>
+          <option value="">Selecciona</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Tarjeta">Tarjeta</option>
+        </select>
+      </label>
+      <label>Monto abonado<input type="number" name="monto" required /></label>
+      <button type="submit">Enviar</button>
+      <p id="estado" class="estado"></p>
+    </form>
+  </div>
+
+  <script>
+    gsap.from(".form-container", { duration: 1, y: -50, opacity: 0, ease: "power2.out" });
+
+    document.getElementById("paciente-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      document.getElementById("estado").textContent = "Enviando...";
+
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbzbRjEQE-B1ZWjXJbDOwFTPiceyqb0lkBp9H61EQ3o2zbFaheFkR6Hlzjh6RR-UzIMH/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: data
+        });
+        form.reset();
+        document.getElementById("estado").textContent = "¡Datos enviados con éxito!";
+      } catch {
+        document.getElementById("estado").textContent = "Error al enviar.";
+      }
+    });
+  </script>
+</body>
+</html>
